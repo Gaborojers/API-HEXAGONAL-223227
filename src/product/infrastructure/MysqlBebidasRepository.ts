@@ -1,4 +1,3 @@
-// mysqlBebidasRepository.ts
 import { query } from "../../database/mysql";
 import { BebidasModel } from "../domain/Bebidas";
 import { BebidasRepository } from "../domain/BebidasRepository";
@@ -6,30 +5,22 @@ import { BebidasRepository } from "../domain/BebidasRepository";
 export class MysqlBebidasRepository implements BebidasRepository {
   private tableName = "bebidas";
 
-  async agregarBebida(
-    sabor: string,
-    cantidad: number,
-    precioCosto: number, 
-    precioVenta: number
-  ): Promise<BebidasModel | null> {
+  async agregarBebida(bebida: BebidasModel): Promise<void> {
+    const { sabor, cantidad, precioCosto, precioVenta } = bebida;
+  
     const sql =
       "INSERT INTO bebidas (sabor, cantidad, precioCosto, precioVenta) VALUES (?, ?, ?, ?)";
     const params: any[] = [sabor, cantidad, precioCosto, precioVenta];
-
+  
     try {
       const [result]: any = await query(sql, params);
-      return {
-        id: result.insertId.toString(),
-        sabor,
-        cantidad,
-        precioCosto,
-        precioVenta,
-      };
+      // Puedes realizar acciones adicionales aquí si es necesario
     } catch (error) {
       console.error(error);
-      return null;
+      throw new Error("Error al agregar bebida");
     }
   }
+  
 
   async obtenerBebidaPorId(id: string): Promise<BebidasModel | null> {
     const sql = "SELECT * FROM bebidas WHERE id = ?";
@@ -42,17 +33,10 @@ export class MysqlBebidasRepository implements BebidasRepository {
         return null;
       }
 
-      const bebidaData = result[0];
-      return {
-        id: bebidaData.id.toString(),
-        sabor: bebidaData.sabor,
-        cantidad: bebidaData.cantidad,
-        precioCosto: bebidaData.precioCosto,
-        precioVenta: bebidaData.precioVenta,
-      };
+      return this.mapToBebidasModel(result[0]);
     } catch (error) {
       console.error(error);
-      return null;
+      throw new Error("Error al obtener bebida por ID");
     }
   }
 
@@ -63,40 +47,27 @@ export class MysqlBebidasRepository implements BebidasRepository {
       const [data]: any = await query(sql, []);
       const dataBebidas = Object.values(JSON.parse(JSON.stringify(data)));
 
-      return dataBebidas.map(
-        (bebida: any) =>
-          ({
-            id: bebida.id.toString(),
-            sabor: bebida.sabor,
-            cantidad: bebida.cantidad,
-            precioCosto: bebida.precioCosto,
-            precioVenta: bebida.precioVenta,
-          } as BebidasModel)
-      );
+      return dataBebidas.map((bebida: any) => this.mapToBebidasModel(bebida));
     } catch (error) {
       console.error(error);
-      return [];
+      throw new Error("Error al obtener todas las bebidas");
     }
   }
 
-  async actualizarBebida(
-    id: string,
-    sabor: string,
-    cantidad: number,
-    precioCosto: number,
-    precioVenta: number
-  ): Promise<BebidasModel | null> {
+  async actualizarBebida(bebida: BebidasModel): Promise<BebidasModel | null> {
+    const { id, sabor, cantidad, precioCosto, precioVenta } = bebida;
+  
     const sql =
       "UPDATE bebidas SET sabor = ?, cantidad = ?, precioCosto = ?, precioVenta = ? WHERE id = ?";
     const params: any[] = [sabor, cantidad, precioCosto, precioVenta, id];
-
+  
     try {
       const [result]: any = await query(sql, params);
-
+  
       if (result.affectedRows === 0) {
         return null;
       }
-
+  
       return {
         id,
         sabor,
@@ -106,9 +77,10 @@ export class MysqlBebidasRepository implements BebidasRepository {
       };
     } catch (error) {
       console.error(error);
-      return null;
+      throw new Error("Error al actualizar bebida");
     }
   }
+  
 
   async eliminarBebida(id: string): Promise<boolean> {
     const sql = "DELETE FROM bebidas WHERE id = ?";
@@ -119,7 +91,17 @@ export class MysqlBebidasRepository implements BebidasRepository {
       return result.affectedRows > 0;
     } catch (error) {
       console.error(error);
-      return false;
+      throw new Error("Error al eliminar bebida");
     }
+  }
+
+  private mapToBebidasModel(bebidaData: any): BebidasModel {
+    return {
+      id: bebidaData.id.toString(),
+      sabor: bebidaData.sabor,
+      cantidad: bebidaData.cantidad,
+      precioCosto: bebidaData.precioCosto,
+      precioVenta: bebidaData.precioVenta,
+    };
   }
 }

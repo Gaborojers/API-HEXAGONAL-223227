@@ -1,4 +1,4 @@
-export class Bebida {
+export class BebidasModel {
   constructor(
     readonly id: string,
     readonly sabor: string,

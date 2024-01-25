@@ -2,7 +2,7 @@ import { CreateBebidaUseCase } from "../application/CreateBebidaUseCase";
 import { EditBebidaUseCase } from "../application/EditBebidaUseCase";
 import { CreateBebidaController } from "./controllers/CreateBebidaController";
 import { EditBebidaController } from "./controllers/EditBebidaController";
-import { MysqlBebidasRepository } from "./MySQLBebidasRepository";
+import { MysqlBebidasRepository } from "./MysqlBebidasRepository";
 
 const mysqlBebidasRepository = new MysqlBebidasRepository();
 const createBebidaUseCase = new CreateBebidaUseCase(mysqlBebidasRepository);
@@ -16,4 +16,4 @@ export {
   editBebidaUseCase,
   createBebidaController,
   editBebidaController,
-};
+}; 

@@ -1,12 +1,12 @@
-import { Bebida } from '../domain/Bebidas';
-import { BebidaRepository } from '../domain/BebidasRepository';
+import { BebidasModel } from '../domain/Bebidas';
+import { BebidasRepository } from '../domain/BebidasRepository';
 
 export class CreateBebidaUseCase {
-  constructor(private readonly bebidaRepository: BebidaRepository) {}
+  constructor(private readonly bebidaRepository: BebidasRepository) {}
 
-  async run(sabor: string, cantidad: number, precioCosto: number, precioVenta: number): Promise<Bebida | null> {
+  async run(sabor: string, cantidad: number, precioCosto: number, precioVenta: number): Promise<BebidasModel | null> {
     try {
-      const nuevaBebida = new Bebida(
+      const nuevaBebida = new BebidasModel(
         /* Generar un ID único según tus necesidades, puedes usar bibliotecas como 'uuid' o generar IDs manualmente */
         'ID_GENERADO',
         sabor.trim(),

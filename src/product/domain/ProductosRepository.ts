@@ -1,8 +1,8 @@
 import { Product } from './Productos';
 
 export class ProductRepository {
-  private products: Product[] = [];
-  private nextId: number = 1;
+  public products: Product[] = [];
+  public nextId: number = 1;
 
   addProduct(product: Product): Product {
     const newProduct = new Product(this.nextId++, product.name, product.description, product.price);

@@ -1,5 +1,4 @@
 import { Request, Response } from "express";
-import { Product } from '../../domain/Productos';
 import { ProductRepository } from '../../domain/ProductosRepository';
 import { DeleteProductUseCase } from '../../application/DeleteProductosUseCase';
 
@@ -13,13 +12,13 @@ export class DeleteProductoController {
     const productId = req.params.id; // Obtener el ID desde los parámetros de la URL
 
     try {
-      const product: Product | null = this.productRepository.getProductById(Number(productId));
+      const product = this.productRepository.getProductById(Number(productId));
 
-      // Verifica si el producto existe antes de intentar eliminarlo
+      // Verificar si el producto existe antes de intentar eliminarlo
       if (product) {
-        const isDeleted: boolean = await this.deleteProductUseCase.run(product.id);
+        const isDeleted = await this.deleteProductUseCase.run(product.id);
 
-        // Devuelve true si el producto existía y se eliminó correctamente
+        // Devolver true si el producto existía y se eliminó correctamente
         if (isDeleted) {
           res.status(200).send({
             status: "success",
@@ -51,3 +50,10 @@ export class DeleteProductoController {
     }
   }
 }
+
+// Crear instancias adecuadas de ProductRepository y DeleteProductUseCase
+const productRepository = new ProductRepository(); // Asegúrate de que ProductRepository esté correctamente implementado
+const deleteProductUseCase = new DeleteProductUseCase(); // Asegúrate de que DeleteProductUseCase esté correctamente implementado
+
+// Crear instancia de DeleteProductoController
+const deleteProductController = new DeleteProductoController(productRepository, deleteProductUseCase);
