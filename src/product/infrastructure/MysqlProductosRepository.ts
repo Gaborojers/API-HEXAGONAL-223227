@@ -11,7 +11,7 @@ interface ProductRepository {
 }
 
 export class MysqlProductRepository implements ProductRepository {
-  public products: Product[] = []; // Cambié a 'public'
+  public products: Product[] = [];
   public nextId: number = 1;
 
   addProduct(product: Product): Product {

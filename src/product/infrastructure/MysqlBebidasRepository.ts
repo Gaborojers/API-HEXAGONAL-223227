@@ -14,7 +14,6 @@ export class MysqlBebidasRepository implements BebidasRepository {
   
     try {
       const [result]: any = await query(sql, params);
-      // Puedes realizar acciones adicionales aquí si es necesario
     } catch (error) {
       console.error(error);
       throw new Error("Error al agregar bebida");

@@ -27,7 +27,6 @@ export class CreateBebidaController {
             cantidad: bebida.cantidad,
             precioCosto: bebida.precioCosto,
             precioVenta: bebida.precioVenta,
-            // Otros campos del modelo si es necesario
           },
         });
       } else {
@@ -50,7 +49,7 @@ export class CreateBebidaController {
           message: errorMessage,
         });
       } else {
-        // En este punto, 'error' es de tipo 'unknown', así que puedes manejarlo según tus necesidades
+        // En este punto, 'error' es de tipo 'unknown'
         console.error("Error desconocido:", error);
 
         // HTTP Code: 204 Sin contenido

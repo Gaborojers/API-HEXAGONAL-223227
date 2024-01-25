@@ -19,7 +19,7 @@ export class DeleteProductUseCase {
       // Si el producto no existe
       return false;
     } catch (error) {
-      // Manejar errores, puedes imprimirlos o lanzarlos según tu necesidad
+      // Manejar errores
       console.error(error);
       return false;
     }

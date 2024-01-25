@@ -14,7 +14,7 @@ export class DeleteProductoController {
     try {
       const product = this.productRepository.getProductById(Number(productId));
 
-      // Verificar si el producto existe antes de intentar eliminarlo
+      // Verifica si el producto existe antes de intentar eliminarlo
       if (product) {
         const isDeleted = await this.deleteProductUseCase.run(product.id);
 
@@ -40,7 +40,6 @@ export class DeleteProductoController {
         });
       }
     } catch (error) {
-      // Manejar errores, puedes imprimirlos o lanzarlos según tu necesidad
       console.error(error);
       res.status(500).send({
         status: "error",
@@ -51,9 +50,7 @@ export class DeleteProductoController {
   }
 }
 
-// Crear instancias adecuadas de ProductRepository y DeleteProductUseCase
-const productRepository = new ProductRepository(); // Asegúrate de que ProductRepository esté correctamente implementado
-const deleteProductUseCase = new DeleteProductUseCase(); // Asegúrate de que DeleteProductUseCase esté correctamente implementado
+const productRepository = new ProductRepository();
+const deleteProductUseCase = new DeleteProductUseCase();
 
-// Crear instancia de DeleteProductoController
 const deleteProductController = new DeleteProductoController(productRepository, deleteProductUseCase);

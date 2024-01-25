@@ -17,7 +17,6 @@ export class EditBebidaController {
             id: bebida.id,
             sabor: bebida.sabor,
             cantidad: bebida.cantidad,
-            // Agrega otros campos si es necesario
           },
         });
       } else {
