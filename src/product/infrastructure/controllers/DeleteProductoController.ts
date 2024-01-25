@@ -51,6 +51,6 @@ export class DeleteProductoController {
 }
 
 const productRepository = new ProductRepository();
-const deleteProductUseCase = new DeleteProductUseCase();
+const deleteProductUseCase = new DeleteProductUseCase(productRepository);
 
 const deleteProductController = new DeleteProductoController(productRepository, deleteProductUseCase);

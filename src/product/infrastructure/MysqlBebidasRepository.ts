@@ -13,7 +13,7 @@ export class MysqlBebidasRepository implements BebidasRepository {
     const params: any[] = [sabor, cantidad, precioCosto, precioVenta];
   
     try {
-      const [result]: any = await query(sql, params);
+      await query(sql, params);
     } catch (error) {
       console.error(error);
       throw new Error("Error al agregar bebida");

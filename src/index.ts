@@ -14,7 +14,7 @@ app.use("/bebidas", bebidasRouter);
 app.use("/productos", productosRouter);
 
 // Puerto para la aplicación
-const port = process.env.PORT || 3000;
+const port = process.env.PORT ?? 3000;
 
 // Inicio del servidor
 app.listen(port, () => {

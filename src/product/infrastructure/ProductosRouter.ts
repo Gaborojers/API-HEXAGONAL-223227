@@ -7,11 +7,13 @@ export const productosRouter = express.Router();
 // Nuevos Endpoints para Productos
 productosRouter.post(
   "/",
-  createProductController.run.bind(createProductController)
+  (req, res) => createProductController.run(req, res)
+  //createProductController.run.bind(createProductController)
 );
 productosRouter.delete(
   "/:id",
-  deleteProductController.run.bind(deleteProductController)
+  (req, res) => deleteProductController.run(req, res)
+  //deleteProductController.run.bind(deleteProductController)
 );
 
 export default productosRouter;

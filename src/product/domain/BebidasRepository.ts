@@ -14,7 +14,7 @@ export class BebidaRepositoryImpl implements BebidasRepository {
   async agregarBebida(bebida: BebidasModel): Promise<void> { 
     this.bebidas.push(bebida);
   }
-
+ 
   async obtenerBebidaPorId(id: string): Promise<BebidasModel | null> {
     return this.bebidas.find((bebida) => bebida.id === id) ?? null;
   }
