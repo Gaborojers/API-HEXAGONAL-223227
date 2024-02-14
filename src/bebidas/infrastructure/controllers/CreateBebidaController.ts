@@ -18,7 +18,6 @@ export class CreateBebidaController {
       );
 
       if (bebida) {
-        // HTTP Code: 201 -> Creado
         res.status(201).json({
           status: "success",
           data: {
@@ -30,19 +29,15 @@ export class CreateBebidaController {
           },
         });
       } else {
-        // HTTP Code: 204 Sin contenido
         res.status(204).json({
           status: "error",
           data: "No fue posible agregar el registro",
         });
       }
     } catch (error) {
-      // Comprobación de tipo para error
       if (error instanceof Error) {
-        // Acceder a la propiedad message
         const errorMessage = error.message;
 
-        // HTTP Code: 204 Sin contenido
         res.status(204).json({
           status: "error",
           data: "Ocurrió un error",

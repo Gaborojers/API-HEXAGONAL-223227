@@ -1,0 +1,18 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.editBebidaController = exports.createBebidaController = exports.editBebidaUseCase = exports.createBebidaUseCase = exports.mysqlBebidasRepository = void 0;
+const CreateBebidaUseCase_1 = require("../application/CreateBebidaUseCase");
+const EditBebidaUseCase_1 = require("../application/EditBebidaUseCase");
+const CreateBebidaController_1 = require("./controllers/CreateBebidaController");
+const EditBebidaController_1 = require("./controllers/EditBebidaController");
+const MysqlBebidasRepository_1 = require("./MysqlBebidasRepository");
+const mysqlBebidasRepository = new MysqlBebidasRepository_1.MysqlBebidasRepository();
+exports.mysqlBebidasRepository = mysqlBebidasRepository;
+const createBebidaUseCase = new CreateBebidaUseCase_1.CreateBebidaUseCase(mysqlBebidasRepository);
+exports.createBebidaUseCase = createBebidaUseCase;
+const editBebidaUseCase = new EditBebidaUseCase_1.EditBebidaUseCase(mysqlBebidasRepository);
+exports.editBebidaUseCase = editBebidaUseCase;
+const createBebidaController = new CreateBebidaController_1.CreateBebidaController(createBebidaUseCase);
+exports.createBebidaController = createBebidaController;
+const editBebidaController = new EditBebidaController_1.EditBebidaController(editBebidaUseCase);
+exports.editBebidaController = editBebidaController;

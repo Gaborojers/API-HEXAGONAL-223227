@@ -8,10 +8,9 @@ export class CreateProductController {
     const data = req.body;
     try {
       const product = await this.createProductoUseCase.run(
-        data.nombre,
-        data.cantidad,
-        data.precioCosto,
-        data.precioVenta
+        data.name,
+        data.description,
+        data.price
       );
 
       if (product)

@@ -7,7 +7,6 @@ export class CreateBebidaUseCase {
   async run(sabor: string, cantidad: number, precioCosto: number, precioVenta: number): Promise<BebidasModel | null> {
     try {
       const nuevaBebida = new BebidasModel(
-        /* Generar un ID único según tus necesidades*/
         'ID_GENERADO',
         sabor.trim(),
         cantidad,

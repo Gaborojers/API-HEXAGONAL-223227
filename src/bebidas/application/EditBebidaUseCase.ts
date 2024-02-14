@@ -9,7 +9,7 @@ export class EditBebidaUseCase {
       const bebida = await this.bebidaRepository.obtenerBebidaPorId(id);
 
       if (!bebida) {
-        return null; // Bebida no encontrada
+        return null;
       }
 
       const bebidaActualizada = new BebidasModel(bebida.id, sabor.trim(), cantidad, bebida.precioCosto, bebida.precioVenta);

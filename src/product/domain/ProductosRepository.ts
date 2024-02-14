@@ -5,7 +5,7 @@ export class ProductRepository {
   public nextId: number = 1;
 
   addProduct(product: Product): Product {
-    const newProduct = new Product(this.nextId++, product.name, product.description, product.price);
+    const newProduct = new Product(this.nextId++, product.name, product.description, product.price,);
     this.products.push(newProduct);
     return newProduct;
   }

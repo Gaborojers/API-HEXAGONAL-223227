@@ -4,12 +4,10 @@ import { Product } from '../domain/Productos';
 export class CreateProductoUseCase {
   constructor(private readonly productRepository: ProductRepository) {}
 
-  async run(nombre: string, cantidad: number, precioCosto: number, precioVenta: number): Promise<Product | null> {
+  async run(name: string, description: string, price: number): Promise<Product | null> {
     try {
-      // Crear una instancia de Product
-      const newProduct = new Product(0, nombre.trim(), `Description for ${nombre}`, precioVenta);
+      const newProduct = new Product(0, name, description, price);
 
-      // Agregar el producto utilizando el repositorio
       const createdProduct = this.productRepository.addProduct(newProduct);
 
       return createdProduct;
