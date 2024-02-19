@@ -8,7 +8,7 @@ const express_1 = __importDefault(require("express"));
 const signale_1 = require("signale");
 const BebidasRouter_1 = require("./bebidas/infrastructure/BebidasRouter");
 const ProductosRouter_1 = require("./product/infrastructure/ProductosRouter");
-const UsersRoutes_1 = require("./users/infrastructure/UsersRoutes"); 
+const UsersRoutes_1 = require("./users/infrastructure/UsersRoutes");
 const app = (0, express_1.default)();
 const signale = new signale_1.Signale();
 app.use(express_1.default.json());

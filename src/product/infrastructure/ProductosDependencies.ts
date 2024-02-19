@@ -6,10 +6,15 @@ import { DeleteProductoController } from "./controllers/DeleteProductoController
 import { MysqlProductRepository } from "./MysqlProductosRepository";
 import { GetProductByIdUseCase } from "../application/GetProductoByIdUseCase";
 import { GetProductByIdController } from "./controllers/GetProductoByIdController";
+import { INotificationNewProduct } from "../domain/services/INotificationNewProduct";
+import { NotificactionNewProduct } from "./servicesRabbitMQ/NotificationNewProduct";
+import { NotificactionProductUseCase } from "../application/services/NotificationNewProduct";
 
 const mysqlProductRepository = new MysqlProductRepository();
 const productRepository = new ProductRepository();
-const createProductUseCase = new CreateProductoUseCase(mysqlProductRepository);
+const servicesNotification = new NotificactionNewProduct();
+const serviceNotificationUseCase = new NotificactionProductUseCase(servicesNotification);
+const createProductUseCase = new CreateProductoUseCase(mysqlProductRepository, serviceNotificationUseCase);
 const deleteProductUseCase = new DeleteProductUseCase(mysqlProductRepository);
 const createProductController = new CreateProductController(createProductUseCase);
 const deleteProductController = new DeleteProductoController(productRepository,deleteProductUseCase);
@@ -23,5 +28,7 @@ export {
   createProductController,
   deleteProductController,
   getProductByIdUseCase,
-  getProductByIdController
+  getProductByIdController,
+  servicesNotification,
+  serviceNotificationUseCase
 };

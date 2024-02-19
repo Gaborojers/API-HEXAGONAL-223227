@@ -1,3 +1,4 @@
+// services/NotificationService.ts
 import { Channel, Connection, connect } from 'amqplib';
 
 export class NotificationService {
@@ -19,7 +20,19 @@ export class NotificationService {
       throw new Error('La conexión con RabbitMQ no está establecida');
     }
 
-    // Declarar la cola
+    /*
+    // Declarar el exchange
+    const exchangeName = 'notifications_exchange';
+    await this.channel.assertExchange(exchangeName, 'direct', { durable: false });
+
+    // Enviar mensaje al exchange
+    this.channel.publish(exchangeName, '', Buffer.from(message), { headers: { userId } });
+    console.log(" [x] Sent notification for user '%s'", userId);
+  }
+  */
+
+   
+  // Declarar la cola
     const queueName = 'notifications';
     await this.channel.assertQueue(queueName, { durable: false });
 
@@ -27,6 +40,7 @@ export class NotificationService {
     this.channel.sendToQueue(queueName, Buffer.from(message), { headers: { userId } });
     console.log(" [x] Sent notification for user '%s'", userId);
   }
+ 
 
   async close(): Promise<void> {
     if (this.channel) {

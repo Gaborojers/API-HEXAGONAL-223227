@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getProductByIdController = exports.getProductByIdUseCase = exports.deleteProductController = exports.createProductController = exports.deleteProductUseCase = exports.createProductUseCase = exports.mysqlProductRepository = void 0;
+exports.serviceNotificationUseCase = exports.servicesNotification = exports.getProductByIdController = exports.getProductByIdUseCase = exports.deleteProductController = exports.createProductController = exports.deleteProductUseCase = exports.createProductUseCase = exports.mysqlProductRepository = void 0;
 const CreateProductoUseCase_1 = require("../application/CreateProductoUseCase");
 const DeleteProductosUseCase_1 = require("../application/DeleteProductosUseCase");
 const ProductosRepository_1 = require("../domain/ProductosRepository");
@@ -9,10 +9,16 @@ const DeleteProductoController_1 = require("./controllers/DeleteProductoControll
 const MysqlProductosRepository_1 = require("./MysqlProductosRepository");
 const GetProductoByIdUseCase_1 = require("../application/GetProductoByIdUseCase");
 const GetProductoByIdController_1 = require("./controllers/GetProductoByIdController");
+const NotificationNewProduct_1 = require("./servicesRabbitMQ/NotificationNewProduct");
+const NotificationNewProduct_2 = require("../application/services/NotificationNewProduct");
 const mysqlProductRepository = new MysqlProductosRepository_1.MysqlProductRepository();
 exports.mysqlProductRepository = mysqlProductRepository;
 const productRepository = new ProductosRepository_1.ProductRepository();
-const createProductUseCase = new CreateProductoUseCase_1.CreateProductoUseCase(mysqlProductRepository);
+const servicesNotification = new NotificationNewProduct_1.NotificactionNewProduct();
+exports.servicesNotification = servicesNotification;
+const serviceNotificationUseCase = new NotificationNewProduct_2.NotificactionProductUseCase(servicesNotification);
+exports.serviceNotificationUseCase = serviceNotificationUseCase;
+const createProductUseCase = new CreateProductoUseCase_1.CreateProductoUseCase(mysqlProductRepository, serviceNotificationUseCase);
 exports.createProductUseCase = createProductUseCase;
 const deleteProductUseCase = new DeleteProductosUseCase_1.DeleteProductUseCase(mysqlProductRepository);
 exports.deleteProductUseCase = deleteProductUseCase;

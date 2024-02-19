@@ -9,15 +9,15 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.EncryptionHelper = void 0;
-class EncryptionHelper {
-    constructor(encryptionService) {
-        this.encryptionService = encryptionService;
+exports.NotificactionProductUseCase = void 0;
+class NotificactionProductUseCase {
+    constructor(serviceNotification) {
+        this.serviceNotification = serviceNotification;
     }
-    encryptPassword(password) {
+    run(product) {
         return __awaiter(this, void 0, void 0, function* () {
-            return this.encryptionService.hashPassword(password);
+            yield this.serviceNotification.sendNotification(product);
         });
     }
 }
-exports.EncryptionHelper = EncryptionHelper;
+exports.NotificactionProductUseCase = NotificactionProductUseCase;

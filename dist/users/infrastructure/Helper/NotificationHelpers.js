@@ -9,26 +9,32 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.CreateProductoUseCase = void 0;
-const Productos_1 = require("../domain/Productos");
-class CreateProductoUseCase {
-    constructor(productRepository, sendNotification) {
-        this.productRepository = productRepository;
-        this.sendNotification = sendNotification;
+exports.NotificationHelper = void 0;
+class NotificationHelper {
+    constructor(notificationService) {
+        this.notificationService = notificationService;
     }
-    run(name, description, price) {
+    init() {
+        return __awaiter(this, void 0, void 0, function* () {
+            yield this.notificationService.init();
+        });
+    }
+    sendNotification(userId, message) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const newProduct = new Productos_1.Product(0, name, description, price);
-                const createdProduct = this.productRepository.addProduct(newProduct);
-                this.sendNotification.run(createdProduct);
-                return createdProduct;
+                yield this.notificationService.sendNotification(userId, message);
+                console.log(`Notification sent successfully to user ${userId}`);
             }
             catch (error) {
-                console.error(error);
-                return null;
+                if (error instanceof Error) {
+                    console.error(`Failed to send notification to user ${userId}: ${error.message}`);
+                }
+                else {
+                    console.error(`Failed to send notification to user ${userId}: ${error}`);
+                }
+                throw error;
             }
         });
     }
 }
-exports.CreateProductoUseCase = CreateProductoUseCase;
+exports.NotificationHelper = NotificationHelper;

@@ -40,7 +40,7 @@ class EncryptionService {
         return __awaiter(this, void 0, void 0, function* () {
             const hashedPassword = yield bcrypt.hash(password, 10);
             return hashedPassword;
-        }); 
+        });
     }
 }
 exports.EncryptionService = EncryptionService;
