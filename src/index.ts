@@ -1,4 +1,5 @@
 import express from "express";
+import cors from "cors"; // Importa el middleware cors
 import { Signale } from "signale";
 import { bebidasRouter } from "./bebidas/infrastructure/BebidasRouter";
 import { productosRouter } from "./product/infrastructure/ProductosRouter";
@@ -7,6 +8,9 @@ import { usersRouter } from './users/infrastructure/UsersRoutes';
 const app = express();
 const signale = new Signale();
 app.use(express.json());
+
+// Habilita CORS para todas las solicitudes
+app.use(cors());
 
 // Rutas para el servicio de bebidas
 app.use("/bebidas", bebidasRouter);

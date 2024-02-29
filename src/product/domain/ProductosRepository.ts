@@ -1,4 +1,4 @@
-import { Product } from './Productos';
+/*import { Product } from './Productos';
 
 export class ProductRepository {
   public products: Product[] = [];
@@ -17,7 +17,7 @@ export class ProductRepository {
 
   getAllProducts(): Product[] {
     return this.products.map((product) => ({ ...product }));
-  }
+  } 
  
   updateProduct(updatedProduct: Product): Product | null {
     const index = this.products.findIndex((p) => p.id === updatedProduct.id);
@@ -40,4 +40,16 @@ export class ProductRepository {
 
     return false;
   }
+}*/
+
+import { Product } from './Productos';
+
+interface ProductRepository {
+  addProduct(product: Product): Promise<Product | null>;
+  getProductById(productId: number): Promise<Product | null>;
+  getAllProducts(): Promise<Product[]>;
+  updateProduct(updatedProduct: Product): Promise<Product | null>;
+  deleteProduct(productId: number): Promise<boolean>;
 }
+
+export { ProductRepository };

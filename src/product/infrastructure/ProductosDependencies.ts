@@ -1,6 +1,6 @@
 import { CreateProductoUseCase } from "../application/CreateProductoUseCase";
 import { DeleteProductUseCase } from "../application/DeleteProductosUseCase";
-import { ProductRepository } from "../domain/ProductosRepository";
+import type { ProductRepository } from "../domain/ProductosRepository";
 import { CreateProductController } from "./controllers/CreateProductoController";
 import { DeleteProductoController } from "./controllers/DeleteProductoController";
 import { MysqlProductRepository } from "./MysqlProductosRepository";
@@ -11,7 +11,7 @@ import { NotificactionNewProduct } from "./servicesRabbitMQ/NotificationNewProdu
 import { NotificactionProductUseCase } from "../application/services/NotificationNewProduct";
 
 const mysqlProductRepository = new MysqlProductRepository();
-const productRepository = new ProductRepository();
+const productRepository: ProductRepository = new MysqlProductRepository();
 const servicesNotification = new NotificactionNewProduct();
 const serviceNotificationUseCase = new NotificactionProductUseCase(servicesNotification);
 const createProductUseCase = new CreateProductoUseCase(mysqlProductRepository, serviceNotificationUseCase);
@@ -32,3 +32,4 @@ export {
   servicesNotification,
   serviceNotificationUseCase
 };
+ 

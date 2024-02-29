@@ -6,4 +6,4 @@ export class Product {
     readonly price: number
   ) {}
 }
-   
+    
