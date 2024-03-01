@@ -22,7 +22,7 @@ app.use("/productos", productosRouter);
 app.use("/users", usersRouter);
 
 // Puerto para la aplicación
-const port = process.env.PORT ?? 3000;
+const port: string | undefined = process.env.PORT;
 
 // Inicio del servidor
 app.listen(port, () => {
